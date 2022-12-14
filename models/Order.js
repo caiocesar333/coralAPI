@@ -12,11 +12,21 @@ const OrderSchema = new mongoose.Schema(
           type: Number,
           default: 1,
         },
+        desc: {
+          type: String,
+        },
+        price: {
+          type: Number,
+        },
+        name: {
+          type: String,
+        },
       },
     ],
     amount: { type: Number, required: true },
-    address: { type: Object, required: true },
     status: { type: String, default: "pending" },
+    address: { type: Object, required: true },
+    paymentDetails:{ type: String },
   },
   { timestamps: true }
 );
