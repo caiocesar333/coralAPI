@@ -70,7 +70,7 @@ router.get("/find/:id", async (req, res) => {
 });
 
 
-//GET ALL PRODUCTS
+//GET ALL PRODUCTS 2
 router.get("/2", async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.category;
@@ -100,6 +100,7 @@ router.get("/2", async (req, res) => {
 router.get("/", async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.color;
+  const qName = req.query.title;
   try {
     let products;
 
@@ -111,7 +112,14 @@ router.get("/", async (req, res) => {
           $in: [qCategory],
         },
       });
-    } else {
+    } else if (qName) {
+      products = await Product.find({
+        title: {
+          $in: [qName],
+        },
+      });
+    }
+    else {
       products = await Product.find();
     }
 
@@ -120,5 +128,7 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 module.exports = router;
